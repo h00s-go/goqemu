@@ -1,0 +1,28 @@
+[
+  {
+    "name": "first",
+    "password": "password",
+    "monitor": {
+      "address": "127.0.0.1",
+      "port": "28001"
+    },
+    "params": {
+      "machine": "q35,accel=kvm",
+      "m": 2048,
+      "cpu": "host"
+    }
+  },
+  {
+    "name": "second",
+    "password": "password",
+    "monitor": {
+      "address": "127.0.0.1",
+      "port": "28002"
+    },
+    "params": {
+      "machine": "q35,accel=kvm",
+      "m": 2048,
+      "cpu": "host"
+    }
+  }
+]

@@ -5,6 +5,7 @@ import (
 
 	"github.com/h00s/goqemu/config"
 	"github.com/h00s/goqemu/logger"
+	"github.com/h00s/goqemu/qemu"
 )
 
 func main() {
@@ -19,5 +20,8 @@ func main() {
 	}
 	defer l.Close()
 
-	l.Debug("starting...")
+	_, err = qemu.Load("guests.json")
+	if err != nil {
+		l.Fatal(err.Error())
+	}
 }
