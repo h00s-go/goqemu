@@ -1,6 +1,5 @@
-[
-  {
-    "name": "first",
+{
+  "first": {
     "password": "password",
     "monitor": {
       "address": "127.0.0.1",
@@ -12,8 +11,7 @@
       "cpu": "host"
     }
   },
-  {
-    "name": "second",
+  "second": {
     "password": "password",
     "monitor": {
       "address": "127.0.0.1",
@@ -25,4 +23,4 @@
       "cpu": "host"
     }
   }
-]
+}

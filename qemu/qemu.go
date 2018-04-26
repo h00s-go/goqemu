@@ -5,6 +5,9 @@ import (
 	"io/ioutil"
 )
 
+// Guests are all guests defined in json
+type Guests map[string]Guest
+
 // Guest represent one guest data
 type Guest struct {
 	Name     string `json:"name"`
@@ -17,8 +20,8 @@ type Guest struct {
 }
 
 // Load loads guests configuration from path
-func Load(path string) ([]Guest, error) {
-	var g []Guest
+func Load(path string) (Guests, error) {
+	var g Guests
 	guestsJSON, err := ioutil.ReadFile(path)
 	if err != nil {
 		return g, err
