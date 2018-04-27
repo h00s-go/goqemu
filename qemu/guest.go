@@ -7,11 +7,12 @@ import (
 
 // Guest represent one guest data
 type Guest struct {
-	Password string `json:"password"`
+	Qemu     string `json:"qemu" binding:"required"`
+	Password string `json:"password" binding:"required"`
 	Monitor  struct {
 		Address string `json:"address"`
 		Port    string `json:"port"`
-	} `json:"monitor"`
+	} `json:"monitor" binding:"required"`
 	Params  map[string]interface{} `json:"params"`
 	Command string
 }
@@ -19,6 +20,7 @@ type Guest struct {
 // ParseParams generates qemu command line from Params map
 func (g *Guest) ParseParams() error {
 	var c bytes.Buffer
+	c.WriteString(g.Qemu)
 
 	for param, value := range g.Params {
 		switch value.(type) {
@@ -33,6 +35,8 @@ func (g *Guest) ParseParams() error {
 		}
 	}
 
+	c.WriteString(" -monitor tcp:" + g.Monitor.Address + ":" + g.Monitor.Port + ",server,nowait")
+	c.WriteString(" -daemonize &> /dev/null")
 	g.Command = c.String()
 	return nil
 }
