@@ -2,7 +2,6 @@ package qemu
 
 // Guest represent one guest data
 type Guest struct {
-	Name     string `json:"name"`
 	Password string `json:"password"`
 	Monitor  struct {
 		Address string `json:"address"`
