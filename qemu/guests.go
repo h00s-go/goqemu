@@ -6,7 +6,7 @@ import (
 )
 
 // Guests are all guests defined in json
-type Guests map[string]Guest
+type Guests map[string]*Guest
 
 // Load loads guests configuration from path
 func Load(path string) (Guests, error) {
@@ -16,5 +16,11 @@ func Load(path string) (Guests, error) {
 		return g, err
 	}
 	err = json.Unmarshal(guestsJSON, &g)
+	if err != nil {
+		return g, err
+	}
+	for _, guest := range g {
+		guest.ParseParams()
+	}
 	return g, err
 }
