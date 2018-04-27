@@ -11,6 +11,6 @@ func TestLoadingAndParsing(t *testing.T) {
 		t.Error("Error while loading guests", err)
 	}
 	for _, guest := range g {
-		fmt.Println(guest)
+		fmt.Println(guest.Command)
 	}
 }
