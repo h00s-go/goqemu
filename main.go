@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/h00s/goqemu/config"
@@ -20,8 +21,9 @@ func main() {
 	}
 	defer l.Close()
 
-	_, err = qemu.Load("guests.json")
+	g, err := qemu.Load("guests.json")
 	if err != nil {
 		l.Fatal(err.Error())
 	}
+	fmt.Println(g)
 }
