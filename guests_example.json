@@ -1,5 +1,6 @@
 {
   "first": {
+    "qemu": "/opt/qemu/bin/qemu-system-x86_64",
     "password": "password",
     "monitor": {
       "address": "127.0.0.1",
@@ -12,6 +13,7 @@
     }
   },
   "second": {
+    "qemu": "/opt/qemu/bin/qemu-system-x86_64",
     "password": "password",
     "monitor": {
       "address": "127.0.0.1",
