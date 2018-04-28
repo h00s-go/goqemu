@@ -3,6 +3,8 @@ package qemu
 import (
 	"bytes"
 	"errors"
+	"fmt"
+	"log"
 	"os/exec"
 )
 
@@ -37,13 +39,16 @@ func (g *Guest) ParseParams() error {
 	}
 
 	c.WriteString(" -monitor tcp:" + g.Monitor.Address + ":" + g.Monitor.Port + ",server,nowait")
-	c.WriteString(" -daemonize &> /dev/null")
+	c.WriteString(" -daemonize")
 	g.Command = c.String()
 	return nil
 }
 
 // Start starts guest using Command
 func (g *Guest) Start() {
-	cmd := exec.Command("bash", "-c", g.Command)
-	cmd.Start()
+	out, err := exec.Command("bash", "-c", g.Command).CombinedOutput()
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Print(string(out))
 }
