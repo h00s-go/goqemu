@@ -20,7 +20,10 @@ func Load(path string) (Guests, error) {
 		return g, err
 	}
 	for _, guest := range g {
-		guest.ParseParams()
+		err = guest.ParseParams()
+		if err != nil {
+			return g, err
+		}
 	}
 	return g, err
 }

@@ -24,6 +24,7 @@ func main() {
 
 	g, err := qemu.Load(os.Getenv("HOME") + "/.goqemu/guests.json")
 	if err != nil {
+		fmt.Println(err)
 		l.Fatal(err.Error())
 	}
 
