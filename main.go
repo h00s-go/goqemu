@@ -1,7 +1,9 @@
 package main
 
 import (
+	"fmt"
 	"log"
+	"os"
 
 	"github.com/h00s/goqemu/config"
 	"github.com/h00s/goqemu/logger"
@@ -9,7 +11,7 @@ import (
 )
 
 func main() {
-	c, err := config.Load("config.json")
+	c, err := config.Load(os.Getenv("HOME") + "/.goqemu/config.json")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -20,8 +22,17 @@ func main() {
 	}
 	defer l.Close()
 
-	_, err = qemu.Load("guests.json")
+	g, err := qemu.Load(os.Getenv("HOME") + "/.goqemu/guests.json")
 	if err != nil {
 		l.Fatal(err.Error())
+	}
+
+	if len(os.Args) > 1 {
+		switch os.Args[1] {
+		case "start":
+			g[os.Args[2]].Start()
+		}
+	} else {
+		fmt.Println("No commands specified. Exiting.")
 	}
 }

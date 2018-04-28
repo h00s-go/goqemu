@@ -3,6 +3,7 @@ package qemu
 import (
 	"bytes"
 	"errors"
+	"os/exec"
 )
 
 // Guest represent one guest data
@@ -39,4 +40,10 @@ func (g *Guest) ParseParams() error {
 	c.WriteString(" -daemonize &> /dev/null")
 	g.Command = c.String()
 	return nil
+}
+
+// Start starts guest using Command
+func (g *Guest) Start() {
+	cmd := exec.Command("bash", "-c", g.Command)
+	cmd.Start()
 }
