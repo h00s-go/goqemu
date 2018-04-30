@@ -12,7 +12,7 @@ import (
 type Guest struct {
 	Qemu     string `json:"qemu" binding:"required"`
 	Password string `json:"password" binding:"required"`
-	Monitor  struct {
+	QMP      struct {
 		Address string `json:"address"`
 		Port    string `json:"port"`
 	} `json:"monitor" binding:"required"`
@@ -38,7 +38,7 @@ func (g *Guest) ParseParams() error {
 		}
 	}
 
-	c.WriteString(" -monitor tcp:" + g.Monitor.Address + ":" + g.Monitor.Port + ",server,nowait")
+	c.WriteString(" -qmp tcp:" + g.QMP.Address + ":" + g.QMP.Port + ",server,nowait")
 	c.WriteString(" -daemonize")
 	g.Command = c.String()
 	return nil
