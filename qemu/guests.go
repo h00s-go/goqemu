@@ -2,6 +2,7 @@ package qemu
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 )
 
@@ -20,10 +21,11 @@ func Load(path string) (Guests, error) {
 		return g, err
 	}
 	for _, guest := range g {
-		err = guest.ParseParams()
+		command, err := guest.ParseParams()
 		if err != nil {
 			return g, err
 		}
+		fmt.Println(command)
 	}
 	return g, err
 }

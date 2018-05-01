@@ -1,11 +1,13 @@
 {
   "first": {
-    "qemu": "/opt/qemu/bin/qemu-system-x86_64",
-    "password": "password",
-    "monitor": {
-      "address": "127.0.0.1",
-      "port": "28001"
+    "qemu": {
+      "binary": "/opt/qemu/bin/qemu-system-x86_64",
+      "monitor": {
+        "address": "127.0.0.1",
+        "port": "28001"
+      }
     },
+    "password": "password",
     "params": {
       "machine": "q35,accel=kvm",
       "m": 2048,
@@ -13,12 +15,14 @@
     }
   },
   "second": {
-    "qemu": "/opt/qemu/bin/qemu-system-x86_64",
-    "password": "password",
-    "monitor": {
-      "address": "127.0.0.1",
-      "port": "28002"
+    "qemu": {
+      "binary": "/opt/qemu/bin/qemu-system-x86_64",
+      "monitor": {
+        "address": "127.0.0.1",
+        "port": "28002"
+      }
     },
+    "password": "password",
     "params": {
       "machine": "q35,accel=kvm",
       "m": 2048,
