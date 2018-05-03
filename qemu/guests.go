@@ -2,7 +2,6 @@ package qemu
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 )
 
@@ -17,15 +16,5 @@ func Load(path string) (Guests, error) {
 		return g, err
 	}
 	err = json.Unmarshal(guestsJSON, &g)
-	if err != nil {
-		return g, err
-	}
-	for _, guest := range g {
-		command, err := guest.ParseParams()
-		if err != nil {
-			return g, err
-		}
-		fmt.Println(command)
-	}
 	return g, err
 }
