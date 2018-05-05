@@ -3,8 +3,6 @@ package qemu
 import (
 	"bytes"
 	"errors"
-	"fmt"
-	"log"
 	"os/exec"
 )
 
@@ -45,14 +43,14 @@ func (g *Guest) ParseParams() (string, error) {
 }
 
 // Start starts guest using Command
-func (g *Guest) Start() {
+func (g *Guest) Start() (string, error) {
 	startCommand, err := g.ParseParams()
 	if err != nil {
-		log.Println("Unable to parse guest params")
+		return "", errors.New("Unable to parse guest params:" + err.Error())
 	}
-	out, err := exec.Command("bash", "-c", startCommand).CombinedOutput()
+	output, err := exec.Command("bash", "-c", startCommand).CombinedOutput()
 	if err != nil {
-		fmt.Println("There was an error starting guest.")
+		return string(output), errors.New("There was an error starting guest")
 	}
-	fmt.Print(string(out))
+	return string(output), nil
 }

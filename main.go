@@ -31,7 +31,11 @@ func main() {
 	if len(os.Args) > 1 {
 		switch os.Args[1] {
 		case "start":
-			g[os.Args[2]].Start()
+			output, err := g[os.Args[2]].Start()
+			if err != nil {
+				fmt.Println(err.Error())
+			}
+			fmt.Print(output)
 		}
 	} else {
 		fmt.Println("No commands specified. Exiting.")
