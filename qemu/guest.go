@@ -15,8 +15,8 @@ type Guest struct {
 		} `json:"monitor" binding:"required"`
 		Binary string `json:"binary" binding:"required"`
 	} `json:"qemu" binding:"required"`
-	Password string                 `json:"password" binding:"required"`
-	Params   map[string]interface{} `json:"params"`
+	Password string                 `json:"password"`
+	Params   map[string]interface{} `json:"params" binding:"required"`
 }
 
 // ParseParams generates qemu command line from Params map
