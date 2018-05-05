@@ -52,7 +52,7 @@ func (g *Guest) Start() {
 	}
 	out, err := exec.Command("bash", "-c", startCommand).CombinedOutput()
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println("There was an error starting guest.")
 	}
 	fmt.Print(string(out))
 }
