@@ -17,6 +17,7 @@ type Guest struct {
 	} `json:"qemu" binding:"required"`
 	Password string                 `json:"password"`
 	Params   map[string]interface{} `json:"params" binding:"required"`
+	QMP      *QMP
 }
 
 // ParseParams generates qemu command line from Params map
@@ -53,4 +54,9 @@ func (g *Guest) Start() (string, error) {
 		return string(output), errors.New("There was an error starting guest")
 	}
 	return string(output), nil
+}
+
+// Reset does guest system reset
+func (g *Guest) Reset() {
+	g.QMP.SendCommand("system_reset")
 }

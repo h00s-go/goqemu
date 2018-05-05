@@ -36,6 +36,8 @@ func main() {
 				fmt.Println(err.Error())
 			}
 			fmt.Print(output)
+		case "reset":
+			g[os.Args[2]].Reset()
 		}
 	} else {
 		fmt.Println("No commands specified. Exiting.")

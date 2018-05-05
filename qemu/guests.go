@@ -16,5 +16,11 @@ func Load(path string) (Guests, error) {
 		return g, err
 	}
 	err = json.Unmarshal(guestsJSON, &g)
+	if err != nil {
+		return g, err
+	}
+	for _, guest := range g {
+		guest.QMP = NewQMP(guest.Qemu.Monitor.Address, guest.Qemu.Monitor.Port)
+	}
 	return g, err
 }
