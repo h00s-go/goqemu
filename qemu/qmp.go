@@ -18,14 +18,14 @@ func NewQMP(address string, port string) *QMP {
 }
 
 //SendCommand is sending command to guest using QMP
-func (q *QMP) SendCommand(command string) string {
+func (q *QMP) SendCommand(command string) (string, error) {
 	conn, err := net.Dial("tcp", q.address+":"+q.port)
 	if err != nil {
-		// handle error
+		return "", err
 	}
 	fmt.Fprintf(conn, "{ \"execute\": \"qmp_capabilities\" }r\n")
 	bufio.NewReader(conn).ReadString('\n')
 	fmt.Fprintf(conn, "{ \"execute\": \""+command+"\" }r\n")
-	output, _ := bufio.NewReader(conn).ReadString('\n')
-	return output
+	output, err := bufio.NewReader(conn).ReadString('\n')
+	return output, err
 }
