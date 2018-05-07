@@ -2,6 +2,7 @@ package qemu
 
 import (
 	"encoding/json"
+	"errors"
 	"io/ioutil"
 )
 
@@ -23,4 +24,13 @@ func Load(path string) (Guests, error) {
 		guest.QMP = NewQMP(guest.Qemu.Monitor.Address, guest.Qemu.Monitor.Port)
 	}
 	return g, err
+}
+
+// GetGuest returns guest from guests map
+func (g Guests) GetGuest(name string) (*Guest, error) {
+	guest := g[name]
+	if guest != nil {
+		return guest, nil
+	}
+	return nil, errors.New("Guest does not exist")
 }

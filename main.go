@@ -31,13 +31,23 @@ func main() {
 	if len(os.Args) > 1 {
 		switch os.Args[1] {
 		case "start":
-			output, err := g[os.Args[2]].Start()
-			if err != nil {
+			guest, err := g.GetGuest(os.Args[2])
+			if err == nil {
+				output, err := guest.Start()
+				if err != nil {
+					fmt.Println(err.Error())
+				}
+				fmt.Print(output)
+			} else {
 				fmt.Println(err.Error())
 			}
-			fmt.Print(output)
 		case "reset":
-			g[os.Args[2]].Reset()
+			guest, err := g.GetGuest(os.Args[2])
+			if err == nil {
+				guest.Reset()
+			} else {
+				fmt.Println(err.Error())
+			}
 		}
 	} else {
 		fmt.Println("No commands specified. Exiting.")
