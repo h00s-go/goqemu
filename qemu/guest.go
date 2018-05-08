@@ -57,6 +57,6 @@ func (g *Guest) Start() (string, error) {
 }
 
 // Reset does guest system reset
-func (g *Guest) Reset() {
-	g.QMP.SendCommand("system_reset")
+func (g *Guest) Reset() (string, error) {
+	return g.QMP.SendCommand("system_reset")
 }

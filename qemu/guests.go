@@ -37,8 +37,7 @@ func (g Guests) Start(name string) (string, error) {
 // Reset guest with specified name
 func (g Guests) Reset(name string) (string, error) {
 	if guest, ok := g[name]; ok {
-		guest.Reset()
-		return "", nil
+		return guest.Reset()
 	}
 	return "", errors.New("Guest does not exist")
 }
