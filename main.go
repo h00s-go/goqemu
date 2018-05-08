@@ -29,25 +29,19 @@ func main() {
 	}
 
 	if len(os.Args) > 1 {
+		var output string
 		switch os.Args[1] {
 		case "start":
-			guest, err := g.GetGuest(os.Args[2])
-			if err == nil {
-				output, err := guest.Start()
-				if err != nil {
-					fmt.Println(err.Error())
-				}
-				fmt.Print(output)
-			} else {
-				fmt.Println(err.Error())
-			}
+			output, err = qemu.Start(g, os.Args[2])
 		case "reset":
-			guest, err := g.GetGuest(os.Args[2])
-			if err == nil {
-				guest.Reset()
-			} else {
-				fmt.Println(err.Error())
-			}
+			output, err = qemu.Reset(g, os.Args[2])
+		}
+		if err != nil {
+			l.Error(err.Error())
+			fmt.Println(err)
+		}
+		if output != "" {
+			fmt.Println(output)
 		}
 	} else {
 		fmt.Println("No commands specified. Exiting.")
