@@ -17,6 +17,16 @@ func NewQMP(address string, port string) *QMP {
 	return &QMP{address, port}
 }
 
+// IsRunning checks if connection to QMP is possible == QMP is running
+func (q *QMP) IsRunning() bool {
+	conn, err := net.Dial("tcp", q.address+":"+q.port)
+	if err != nil {
+		return false
+	}
+	conn.Close()
+	return true
+}
+
 //SendCommand is sending command to guest using QMP
 func (q *QMP) SendCommand(command string) (string, error) {
 	conn, err := net.Dial("tcp", q.address+":"+q.port)

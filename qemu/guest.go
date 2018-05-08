@@ -43,9 +43,17 @@ func (g *Guest) ParseParams() (string, error) {
 	return c.String(), nil
 }
 
+// IsRunning checks if Guest is running
+func (g *Guest) IsRunning() bool {
+	return g.QMP.IsRunning()
+}
+
 // Start starts guest using Command
 func (g *Guest) Start() (string, error) {
 	startCommand, err := g.ParseParams()
+	if g.IsRunning() {
+		return "", errors.New("Guest is already running")
+	}
 	if err != nil {
 		return "", errors.New("Unable to parse guest params:" + err.Error())
 	}
@@ -58,5 +66,8 @@ func (g *Guest) Start() (string, error) {
 
 // Reset does guest system reset
 func (g *Guest) Reset() (string, error) {
+	if !g.IsRunning() {
+		return "", errors.New("Guest is not running")
+	}
 	return g.QMP.SendCommand("system_reset")
 }
