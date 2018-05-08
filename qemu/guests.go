@@ -26,11 +26,19 @@ func Load(path string) (Guests, error) {
 	return g, err
 }
 
-// GetGuest returns guest from guests map
-func (g Guests) GetGuest(name string) (*Guest, error) {
-	guest := g[name]
-	if guest != nil {
-		return guest, nil
+// Start guest with specified name
+func (g Guests) Start(name string) (string, error) {
+	if guest, ok := g[name]; ok {
+		return guest.Start()
 	}
-	return nil, errors.New("Guest does not exist")
+	return "", errors.New("Guest does not exist")
+}
+
+// Reset guest with specified name
+func (g Guests) Reset(name string) (string, error) {
+	if guest, ok := g[name]; ok {
+		guest.Reset()
+		return "", nil
+	}
+	return "", errors.New("Guest does not exist")
 }

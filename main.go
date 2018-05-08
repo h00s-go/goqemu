@@ -32,9 +32,9 @@ func main() {
 		var output string
 		switch os.Args[1] {
 		case "start":
-			output, err = qemu.Start(g, os.Args[2])
+			output, err = g.Start(os.Args[2])
 		case "reset":
-			output, err = qemu.Reset(g, os.Args[2])
+			output, err = g.Reset(os.Args[2])
 		}
 		if err != nil {
 			l.Error(err.Error())
