@@ -35,6 +35,10 @@ func main() {
 			output, err = g.Start(os.Args[2])
 		case "reset":
 			output, err = g.Reset(os.Args[2])
+		case "shutdown":
+			output, err = g.Shutdown(os.Args[2])
+		case "poweroff":
+			output, err = g.PowerOff(os.Args[2])
 		}
 		if err != nil {
 			l.Error(err.Error())

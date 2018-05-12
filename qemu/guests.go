@@ -41,3 +41,19 @@ func (g Guests) Reset(name string) (string, error) {
 	}
 	return "", errors.New("Guest does not exist")
 }
+
+// Shutdown guest with specified name
+func (g Guests) Shutdown(name string) (string, error) {
+	if guest, ok := g[name]; ok {
+		return guest.Shutdown()
+	}
+	return "", errors.New("Guest does not exist")
+}
+
+// PowerOff guest with specified name
+func (g Guests) PowerOff(name string) (string, error) {
+	if guest, ok := g[name]; ok {
+		return guest.PowerOff()
+	}
+	return "", errors.New("Guest does not exist")
+}

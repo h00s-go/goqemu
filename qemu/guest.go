@@ -71,3 +71,19 @@ func (g *Guest) Reset() (string, error) {
 	}
 	return g.QMP.SendCommand("system_reset")
 }
+
+// Shutdown does guest system reset
+func (g *Guest) Shutdown() (string, error) {
+	if !g.IsRunning() {
+		return "", errors.New("Guest is not running")
+	}
+	return g.QMP.SendCommand("system_powerdown")
+}
+
+// PowerOff does guest system reset
+func (g *Guest) PowerOff() (string, error) {
+	if !g.IsRunning() {
+		return "", errors.New("Guest is not running")
+	}
+	return g.QMP.SendCommand("quit")
+}
