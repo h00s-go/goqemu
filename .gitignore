@@ -3,3 +3,4 @@ guests.json
 config_test.json
 logger/logger_test.log
 goqemu.log
+goqemu
