@@ -11,12 +11,12 @@ import (
 )
 
 func main() {
-	c, err := config.Load(os.Getenv("HOME") + "/.goqemu/config.json")
+	c, err := config.Load(os.Getenv("HOME") + "/.goqemu/config.toml")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	l, err := logger.New(c.Log.Filename)
+	l, err := logger.New(c.Log)
 	if err != nil {
 		log.Fatal(err)
 	}
