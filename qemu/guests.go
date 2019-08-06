@@ -1,9 +1,9 @@
 package qemu
 
 import (
-	"encoding/json"
 	"errors"
-	"io/ioutil"
+
+	"github.com/BurntSushi/toml"
 )
 
 // Guests are all guests defined in json
@@ -12,11 +12,7 @@ type Guests map[string]*Guest
 // Load loads guests configuration from path
 func Load(path string) (Guests, error) {
 	var g Guests
-	guestsJSON, err := ioutil.ReadFile(path)
-	if err != nil {
-		return g, err
-	}
-	err = json.Unmarshal(guestsJSON, &g)
+	_, err := toml.DecodeFile(path, &g)
 	if err != nil {
 		return g, err
 	}

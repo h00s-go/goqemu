@@ -1,6 +1,6 @@
 config.toml
-guests.json
-config_test.json
+config_test.toml
+guests.toml
 logger/logger_test.log
 goqemu.log
 goqemu

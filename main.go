@@ -22,7 +22,7 @@ func main() {
 	}
 	defer l.Close()
 
-	g, err := qemu.Load(os.Getenv("HOME") + "/.goqemu/guests.json")
+	g, err := qemu.Load(os.Getenv("HOME") + "/.goqemu/guests.toml")
 	if err != nil {
 		fmt.Println(err)
 		l.Fatal(err.Error())
