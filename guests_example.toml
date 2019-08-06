@@ -1,32 +1,25 @@
-{
-  "first": {
-    "qemu": {
-      "binary": "/opt/qemu/bin/qemu-system-x86_64",
-      "monitor": {
-        "address": "127.0.0.1",
-        "port": "28001"
-      }
-    },
-    "password": "password",
-    "params": {
-      "machine": "q35,accel=kvm",
-      "m": 2048,
-      "cpu": "host"
-    }
-  },
-  "second": {
-    "qemu": {
-      "binary": "/opt/qemu/bin/qemu-system-x86_64",
-      "monitor": {
-        "address": "127.0.0.1",
-        "port": "28002"
-      }
-    },
-    "password": "password",
-    "params": {
-      "machine": "q35,accel=kvm",
-      "m": 2048,
-      "cpu": "host"
-    }
-  }
-}
+[first]
+  [first.qemu]
+  binary = "/opt/qemu/bin/qemu-system-x86_64"
+
+  [first.qemu.monitor]
+  address = "127.0.0.1"
+  port = "28001"
+
+  [first.params]
+  machine = "q35,accel=kvm"
+  m = "2048"
+  cpu = "host"
+
+[second]
+  [second.qemu]
+  binary = "/opt/qemu/bin/qemu-system-x86_64"
+
+  [second.qemu.monitor]
+  address = "127.0.0.1"
+  port = "28002"
+
+  [second.params]
+  machine = "q35,accel=kvm"
+  m = "2048"
+  cpu = "host"
