@@ -10,13 +10,13 @@ import (
 type Guest struct {
 	Qemu struct {
 		Monitor struct {
-			Address string `json:"address"`
-			Port    string `json:"port"`
-		} `json:"monitor" binding:"required"`
-		Binary string `json:"binary" binding:"required"`
-	} `json:"qemu" binding:"required"`
-	Password string                 `json:"password"`
-	Params   map[string]interface{} `json:"params" binding:"required"`
+			Address string
+			Port    string
+		}
+		Binary string
+	}
+	Password string
+	Params   map[string]interface{}
 	QMP      *QMP
 }
 
